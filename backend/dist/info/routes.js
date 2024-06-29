@@ -17,7 +17,7 @@ const express_1 = __importDefault(require("express"));
 const dao_1 = require("./dao"); // Adjust the path as necessary
 exports.router = express_1.default.Router();
 exports.router.get('/awesome/applicant/hi', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json("hi");
+    res.send("hi");
 }));
 exports.router.get('/awesome/applicant/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = parseInt(req.params.id, 10);
@@ -31,6 +31,24 @@ exports.router.get('/awesome/applicant/:id', (req, res) => __awaiter(void 0, voi
         }
     }
     catch (error) {
+        console.error('Error querying applicant:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}));
+// New route to get applicant by username
+exports.router.get('/awesome/applicant/username/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = decodeURIComponent(req.params.username);
+    try {
+        const applicant = yield dao_1.dao.findApplicantByName(username);
+        if (!applicant) {
+            res.status(404).send('Applicant not found');
+        }
+        else {
+            res.json(applicant);
+        }
+    }
+    catch (error) {
+        console.error('Error querying applicant by name:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }));

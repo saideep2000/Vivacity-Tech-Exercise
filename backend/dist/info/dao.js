@@ -13,16 +13,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dao = void 0;
-const model_1 = require("./model");
 const db_1 = __importDefault(require("../config/db"));
+const model_1 = require("./model");
 class dao {
     static findApplicantById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const { rows } = yield db_1.default.query('SELECT * FROM applicants WHERE id = $1', [id]);
             if (rows.length === 0)
                 return null;
-            const { name, role, location, hobbies } = rows[0];
-            return new model_1.ApplicantModel(id, name, role, location, hobbies);
+            const { id: applicantId, name, role, location, hobbies, tag } = rows[0];
+            return new model_1.ApplicantModel(applicantId, name, role, location, hobbies, tag);
+        });
+    }
+    static findApplicantByName(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { rows } = yield db_1.default.query('SELECT * FROM applicants WHERE name = $1', [name]);
+            if (rows.length === 0)
+                return null;
+            const { id: applicantId, name: applicantName, role, location, hobbies, tag } = rows[0];
+            return new model_1.ApplicantModel(applicantId, applicantName, role, location, hobbies, tag);
+        });
+    }
+    static deleteApplicantsByTag(tag) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield db_1.default.query('DELETE FROM applicants WHERE tag = $1', [tag]);
         });
     }
 }

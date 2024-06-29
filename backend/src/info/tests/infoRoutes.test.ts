@@ -1,24 +1,27 @@
 import request from 'supertest';
 import { app } from '../../server';
 import pool from '../../config/db';
+import { dao } from '../../info/dao';
 
 describe("Applicant Routes", () => {
     let insertedId: number;
+    const testTag = 'test-run'; // Unique tag for test data
 
     beforeAll(async () => {
-        await pool.query('DELETE FROM applicants WHERE name = $1', ['Saideep Samineni']);
-
+        // Insert a test applicant with a unique tag
         const result = await pool.query(`
-            INSERT INTO applicants (name, role, location, hobbies) VALUES
-            ('Saideep Samineni', 'Software Developer', 'New York', '{"Coding", "Reading"}')
+            INSERT INTO applicants (name, role, location, hobbies, tag) VALUES
+            ('Saideep Samineni', 'Software Developer', 'New York', '{"Coding", "Reading"}', $1)
             RETURNING id
-        `);
+        `, [testTag]);
         insertedId = result.rows[0].id;
         console.log('Inserted applicant ID:', insertedId);
     });
 
     afterAll(async () => {
-        await pool.query('DELETE FROM applicants WHERE name = $1', ['Saideep Samineni']);
+        // Clean up the test data using the unique tag
+        await dao.deleteApplicantsByTag(testTag);
+        // Optionally close the pool to clean up database connections
         await pool.end();
     });
 

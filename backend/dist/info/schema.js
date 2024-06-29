@@ -9,6 +9,7 @@ exports.applicantSchema = joi_1.default.object({
     name: joi_1.default.string().required(),
     role: joi_1.default.string().required(),
     location: joi_1.default.string().required(),
-    hobbies: joi_1.default.array().items(joi_1.default.string())
+    hobbies: joi_1.default.array().items(joi_1.default.string()),
+    tag: joi_1.default.string()
 });
 //# sourceMappingURL=schema.js.map
