@@ -11,9 +11,9 @@ This is made part of **Vivacity Tech PBC exercise**.
 
 ## Project Demo
 
-<div align="center">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/59LwPrZfCvo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+
+[![Project Demo](https://img.youtube.com/vi/59LwPrZfCvo/0.jpg)](https://www.youtube.com/watch?v=59LwPrZfCvo)
+
 
 ## Table of Contents
 
