@@ -4,9 +4,14 @@ This project is a simple web application built with Node.js, Express, PostgreSQL
 
 This is made part of **Vivacity Tech PBC exercise**.
 
-![Profile Page](assets/info.png)
 
-![Page To Edit](assets/edit.png)
+<img src="assets/info.png" alt="Profile Page" width="300"/>
+
+
+<img src="assets/edit.png" alt="Page To Edit" width="300"/>
+
+
+<img src="assets/Realtime.mp4" alt="Project Demo" width="300"/>
 
 ## Table of Contents
 
