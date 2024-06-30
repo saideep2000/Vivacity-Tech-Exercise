@@ -7,11 +7,13 @@ This is made part of **Vivacity Tech PBC exercise**.
 
 <img src="assets/info.png" alt="Profile Page" width="300"/>
 
-
 <img src="assets/edit.png" alt="Page To Edit" width="300"/>
 
+## Project Demo
 
-<img src="assets/Realtime.mp4" alt="Project Demo" width="300"/>
+<div align="center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/59LwPrZfCvo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Table of Contents
 
