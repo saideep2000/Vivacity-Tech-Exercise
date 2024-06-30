@@ -13,16 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dao = void 0;
-const db_1 = __importDefault(require("../config/db"));
 const model_1 = require("./model");
+const db_1 = __importDefault(require("../config/db"));
 class dao {
     static findApplicantById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const { rows } = yield db_1.default.query('SELECT * FROM applicants WHERE id = $1', [id]);
             if (rows.length === 0)
                 return null;
-            const { id: applicantId, name, role, location, hobbies, tag } = rows[0];
-            return new model_1.ApplicantModel(applicantId, name, role, location, hobbies, tag);
+            const { name, role, location, hobbies } = rows[0];
+            return new model_1.ApplicantModel(id, name, role, location, hobbies);
         });
     }
     static findApplicantByName(name) {
@@ -30,13 +30,17 @@ class dao {
             const { rows } = yield db_1.default.query('SELECT * FROM applicants WHERE name = $1', [name]);
             if (rows.length === 0)
                 return null;
-            const { id: applicantId, name: applicantName, role, location, hobbies, tag } = rows[0];
-            return new model_1.ApplicantModel(applicantId, applicantName, role, location, hobbies, tag);
+            const { id, role, location, hobbies } = rows[0];
+            return new model_1.ApplicantModel(id, name, role, location, hobbies);
         });
     }
-    static deleteApplicantsByTag(tag) {
+    static updateApplicantByName(name, applicant) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield db_1.default.query('DELETE FROM applicants WHERE tag = $1', [tag]);
+            const { rows } = yield db_1.default.query(`UPDATE applicants SET name = $1, role = $2, location = $3, hobbies = $4 WHERE name = $5 RETURNING *`, [applicant.name, applicant.role, applicant.location, applicant.hobbies, name]);
+            if (rows.length === 0)
+                return null;
+            const { id, role, location, hobbies } = rows[0];
+            return new model_1.ApplicantModel(id, applicant.name, role, location, hobbies);
         });
     }
 }

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
-const dao_1 = require("./dao"); // Adjust the path as necessary
+const dao_1 = require("./dao");
 exports.router = express_1.default.Router();
 exports.router.get('/awesome/applicant/hi', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("hi");
@@ -31,13 +31,11 @@ exports.router.get('/awesome/applicant/:id', (req, res) => __awaiter(void 0, voi
         }
     }
     catch (error) {
-        console.error('Error querying applicant:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }));
-// New route to get applicant by username
 exports.router.get('/awesome/applicant/username/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const username = decodeURIComponent(req.params.username);
+    const username = req.params.username;
     try {
         const applicant = yield dao_1.dao.findApplicantByName(username);
         if (!applicant) {
@@ -48,7 +46,22 @@ exports.router.get('/awesome/applicant/username/:username', (req, res) => __awai
         }
     }
     catch (error) {
-        console.error('Error querying applicant by name:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}));
+exports.router.put('/awesome/applicant/username/:username', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.params.username;
+    const { name, role, location, hobbies } = req.body;
+    try {
+        const updatedApplicant = yield dao_1.dao.updateApplicantByName(username, { name, role, location, hobbies });
+        if (!updatedApplicant) {
+            res.status(404).send('Applicant not found');
+        }
+        else {
+            res.json(updatedApplicant);
+        }
+    }
+    catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }));

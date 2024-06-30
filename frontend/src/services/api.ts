@@ -18,3 +18,9 @@ export const getApplicantByName = async (name: string): Promise<Applicant> => {
   const response = await axios.get<Applicant>(`http://localhost:4000/awesome/applicant/username/${encodedName}`);
   return response.data;
 }
+
+export const updateApplicant = async (applicant: Applicant): Promise<Applicant> => {
+  const encodedName = encodeURIComponent(applicant.name);
+  const response = await axios.put<Applicant>(`http://localhost:4000/awesome/applicant/username/${encodedName}`, applicant);
+  return response.data;
+}

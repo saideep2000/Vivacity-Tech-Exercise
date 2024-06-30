@@ -11,6 +11,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
 }
 
 img {
@@ -20,4 +21,27 @@ img {
 
 img:hover {
   transform: scale(1.1);
+}
+
+.Applicant-info, .Edit-form {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 300px;
+  text-align: left;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #21a1f1;
 }
