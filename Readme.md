@@ -1,8 +1,12 @@
 # Applicant Information System
 
-This project is a simple web application built with Node.js, Express, PostgreSQL, and React. The application allows users to click on a picture and fetch applicant information from a backend API. The information can be edited and updated back to the backend.
+This project is a simple web application built with Node.js, Express, PostgreSQL, and React. The application allows users to click on a picture and fetch applicant information from a backend API from the Postgresql DB. The information can be edited and updated back to the backend. The project is thoroughly tested using Jest for both frontend and backend, ensuring high reliability and correctness.
 
 This is made part of **Vivacity Tech PBC exercise**.
+
+![Profile Page](assets/info.png)
+
+![Page To Edit](assets/edit.png)
 
 ## Table of Contents
 
@@ -195,6 +199,8 @@ npm install @reduxjs/toolkit react-redux @types/react-redux axios
 npm install --save-dev ts-jest @types/jest jest
 
 npm install --save-dev jest ts-jest @types/jest jest-environment-jsdom
+
+npm install --save-dev @testing-library/jest-dom
 
 
 ```
